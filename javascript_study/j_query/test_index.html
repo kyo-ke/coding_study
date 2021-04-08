@@ -1,0 +1,61 @@
+
+ <html lang="en">
+<head>    
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){$('#btnsend').cllick( function(){
+  $('#result').text('通信中...');
+  // Ajax通信を開始
+  $.ajax({
+    url: 'helloAjax.php',
+    type: 'GET',
+    dataType: 'json',
+    // フォーム要素の内容をハッシュ形式に変換
+    data: $('form').serializeArray(),
+    timeout: 5000,
+  })
+  .done(function(data) {
+      // 通信成功時の処理を記述
+      $('#result').append("<p>success</p>");
+  })
+  .fail(function() {
+      // 通信失敗時の処理を記述
+      $('#result').append("<p>failed</p>");
+  });
+})
+});
+</script>
+</head>
+<body>
+<form name="fm">
+    <label>名前：<input type="text" name="name" size="15"></label>
+    <input type="button" id="btnsend" name="submit" value="送信" >
+</form>
+<div id="result"></div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+//    asyncSend = function(){
+//        var req = new XMLHttpRequest();
+//        req.onloadstart = function() {
+//        var result = document.getElementById('result');
+//        if (req.readyState == 4) { // 通信の完了時
+//          if (req.status == 200) { // 通信の成功時
+//            result.innerHTML = req.responseText;
+//          }else{
+//            result.innerHTML = "failed";
+//
+//          }
+//        }else{
+//          result.innerHTML = "通信中...";
+//        }
+//      }
+//      req.open('GET', 'localhost/helloAjax.php?name=' + encodeURIComponent(document.fm.name.value), true);
+//      req.send(null);
+//    }
+//
+</script>
+
